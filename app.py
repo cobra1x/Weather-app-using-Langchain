@@ -19,7 +19,7 @@ if input_txt:
     try:
         weather_data = weather.run(input_txt)
     except Exception as e:
-        st.error("Could not fetch weather data. Please check the city name and try again.")
+        st.error("Could not fetch weather data as city name not available. Please check the city name and try again.")
         weather_data = None
 
 prompt= ChatPromptTemplate.from_messages(
