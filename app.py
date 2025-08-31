@@ -5,6 +5,7 @@ from langchain_core.output_parsers import StrOutputParser
 import streamlit as st
 import os
 import datetime
+import pytz
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,7 +13,8 @@ weather= OpenWeatherMapAPIWrapper(openweathermap_api_key=st.secrets["OPENWEATHER
 
 st.title('Weather info and suggestion for today')
 input_txt=st.text_input("Enter only the city name")
-today=datetime.datetime.now()
+india_tz=pytz.timezone("Asia/Kolkata")
+today=datetime.datetime.now(india_tz)
 if input_txt:
     try:
         weather_data = weather.run(input_txt)
