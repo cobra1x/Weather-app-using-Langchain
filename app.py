@@ -8,10 +8,7 @@ import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
-weather= OpenWeatherMapAPIWrapper()
-
-os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
-os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
+weather= OpenWeatherMapAPIWrapper(openweathermap_api_key=st.secrets["OPENWEATHERMAP_API_KEY"])
 
 st.title('Weather info and suggestion for today')
 input_txt=st.text_input("Enter only the city name")
@@ -35,7 +32,7 @@ prompt= ChatPromptTemplate.from_messages(
          ''')
     ]
 )
-llm=ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+llm=ChatGoogleGenerativeAI(model="gemini-2.5-flash",google_api_key=st.secrets["GOOGLE_API_KEY"])
 output=StrOutputParser()
 chain=prompt|llm|output
 
